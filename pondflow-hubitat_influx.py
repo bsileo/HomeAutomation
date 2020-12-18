@@ -46,7 +46,7 @@ class FlowSensor(object):
     old_count   = 0
     flowCallback = 0
     def __init__(self):
-        flowGpio = 27
+        flowGpio = 17
         pi = pigpio.pi()
         pi.set_mode(flowGpio, pigpio.INPUT)
         pi.set_pull_up_down(flowGpio, pigpio.PUD_DOWN)
