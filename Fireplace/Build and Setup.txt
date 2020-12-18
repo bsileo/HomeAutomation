@@ -1,0 +1,13 @@
+Fireplace Build / Install Notes
+
+
+1. Copy autostart into ~/config/lxsessions/LXDE-pi/autostart
+2. Edit mainwindow.ui in QT Designer
+3. Need Firepalce_qt.sh, fireplace_qt.py, mainwindow.ui on pi
+4. Setup touchscreen???
+5.  Python libraries needed:  (pip)
+        Rpi.GPIO  0.6.3
+
+        PyQT5:
+        sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools
+

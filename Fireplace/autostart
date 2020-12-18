@@ -1,0 +1,11 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@point-rpi
+
+@xscreensaver -no-splash
+@xset s off
+@xset -dpms
+@xset s noblank
+@unclutter -idle 0
+
+@/home/pi/fireplace/fireplace_qt.sh
