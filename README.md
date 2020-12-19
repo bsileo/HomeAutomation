@@ -2,8 +2,11 @@
 - Run Raspberry Pi Imager to setup SD Card
 - See https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 - Enable SSH - https://www.raspberrypi.org/documentation/remote-access/ssh/README.md $3
-- Install SAMBA (optional) https://www.raspberrypi.org/documentation/remote-access/samba.md
+- sudo apt install samba samba-common-bin smbclient cifs-utils
+  - Install SAMBA (optional) https://www.raspberrypi.org/documentation/remote-access/samba.md
+
 - sudo apt-get install nodejs npm
+  - Required to use PM2
   
 
 # HomeAutomation package install

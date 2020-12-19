@@ -114,7 +114,7 @@ class SampleHandler():
             time.sleep(self.INTERVAL_SECONDS)
 
     def start(self):
-        logger.debug('Start Processing')
+        logger.info('Start Processing')
         self._timer_loop()
 
 sh = SampleHandler()
