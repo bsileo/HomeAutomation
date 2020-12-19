@@ -1,7 +1,9 @@
-# Pi Install
+# Pi Build
+- Run Raspberry Pi Imager to setup SD Card
 - See https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 - Enable SSH - https://www.raspberrypi.org/documentation/remote-access/ssh/README.md $3
 - Install SAMBA (optional) https://www.raspberrypi.org/documentation/remote-access/samba.md
+- sudo apt-get install nodejs npm
   
 
 # HomeAutomation package install
@@ -15,8 +17,6 @@ git clone https://github.com/bsileo/HomeAutomation.git
 cd HomeAutoMation
 mkdir logs
 
-sudo apt-get install pm2
-
 ## Python Devices 
 - sudo apt install virtualenv python3-virtualenv -y
 - virtualenv -p /usr/bin/python3 pondflow
@@ -24,7 +24,18 @@ sudo apt-get install pm2
 - pip3 install influxdb
 - pip3 install pigpio
   
-
-sudo pigpiod
+### Testing
 python pondflow-hubitat_influx.py
 
+
+# Auto Startup of Apps on Device
+sudo npm install pm2@latest -g
+pm2 install pm2-logrotate
+
+### Python 
+sudo systemctl enable pigpiod
+sudo systemctl start pigpiod 
+pm2 start job1.py --name job1 --interpreter python3
+pm2 startup
+
+### Node
