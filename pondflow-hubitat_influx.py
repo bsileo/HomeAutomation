@@ -39,7 +39,7 @@ handler = RotatingFileHandler('./logs/PondFlow.log', maxBytes=10000, backupCount
 # create a logging format
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
-logger.addHandler(handler)
+# logger.addHandler(handler)
 
 class FlowSensor(object):
     WATERFLOW = 0
