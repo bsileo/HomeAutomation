@@ -82,8 +82,8 @@ class SampleHandler():
             logger.info('Start logging run')
             for index,s in enumerate(self._sensors):
                 t = s.get_temp()
-                # 1.5 degree calibration factor
-                tF = t * 1.8 + 32 + 1.5
+                # 0.5 degree calibration factor
+                tF = t * 1.8 + 32 + 0.5
                 hIdxURL = hURL + '612' + '/setTemperature/' + str(tF) + '?access_token=c82410cc-4e3b-4eb2-8055-bf3ff4e55678'
                 logger.debug('Send to Hubitat - ' + hIdxURL)
                 resp = requests.get(hIdxURL, timeout=3)
