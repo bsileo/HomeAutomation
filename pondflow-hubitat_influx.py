@@ -42,8 +42,6 @@ handler.setFormatter(formatter)
 # logger.addHandler(handler)
 
 class FlowSensor(object):
-    WATERFLOW = 0
-    old_count   = 0
     flowCallback = 0
     def __init__(self):
         flowGpio = 27
@@ -54,13 +52,12 @@ class FlowSensor(object):
 
     def get_flow(self):
         count = self.flowCallback.tally()
-        self.flowCallback.reset_tally()
         logger.debug("counted {} pulses".format(count))
+        self.flowCallback.reset_tally()
         return count
 
-
 class SampleHandler():
-    INTERVAL_SECONDS = 60*3
+    INTERVAL_SECONDS = 60
     FLOW = 0
     def __init__(self):
         self.FLOW = FlowSensor()
