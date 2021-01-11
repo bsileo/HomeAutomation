@@ -53,13 +53,10 @@ class FlowSensor(object):
         self.flowCallback = pi.callback(flowGpio, pigpio.FALLING_EDGE)
 
     def get_flow(self):
-        waterFlow = 0
-        time.sleep(15)
         count = self.flowCallback.tally()
-        waterFlow = count - self.old_count
-        logger.debug("counted {} pulses".format(waterFlow))
-        self.old_count = count
-        return waterFlow
+        self.flowCallback.reset_tally()
+        logger.debug("counted {} pulses".format(count))
+        return count
 
 
 class SampleHandler():

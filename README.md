@@ -8,7 +8,10 @@
 - sudo apt-get install nodejs npm
   - Required to use PM2
   
-
+  # Setup Info
+  watch -n 1 cat /proc/net/wireless
+  sudo apt-get install wavemon
+  sudo wavemon
 # HomeAutomation package install
 
 git config --global  user.name "Brad Sileo"
@@ -33,7 +36,7 @@ mkdir logs
 
 - // virtualenv -p /usr/bin/python3 pondflow
 
-- // source pondflow/bin/activate
+- // source pondflow/bin/activatesudo apt-get install wavemon
 
 
 ### Testing
