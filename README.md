@@ -18,11 +18,13 @@ git config --global  user.name "Brad Sileo"
 
 git config --global  user.email "brad@sileo.name"
 
+git config --global credential.helper 'cache --timeout=36000'
+
 git clone https://github.com/bsileo/HomeAutomation.git
 -   Username: bsileo
 -  Password: 64eb61c8427e926670248aafa81c04f19ba93623  (Access Token from https://github.com/settings/tokens)
 
-cd HomeAutoMation
+cd HomeAutomation
 
 mkdir logs
 
