@@ -46,7 +46,7 @@ class FlowSensor(object):
     old_count   = 0
     flowCallback = 0
     def __init__(self):
-        flowGpio = 17
+        flowGpio = 27
         pi = pigpio.pi()
         pi.set_mode(flowGpio, pigpio.INPUT)
         pi.set_pull_up_down(flowGpio, pigpio.PUD_DOWN)
@@ -60,7 +60,7 @@ class FlowSensor(object):
 
 
 class SampleHandler():
-    INTERVAL_SECONDS = 60
+    INTERVAL_SECONDS = 60*3
     FLOW = 0
     def __init__(self):
         self.FLOW = FlowSensor()
