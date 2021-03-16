@@ -6,6 +6,6 @@ export DISPLAY=:0
 #export TSLIB_TSDEVICE=/dev/input/touchscreen
 
 #python3 fireplace_qt.py -platform linuxfb:fb=/dev/fb1
-python3 /home/pi/fireplace/fireplace_qt.py >> /home/pi/fireplace/fireplace_qt.log
+python3 ~/HomeAutomation/Fireplace/fireplace_qt.py >> ~/fireplace_qt.log
 
 

@@ -25,7 +25,7 @@ console_handler.setFormatter(logging.Formatter(log_format))
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 logger.addHandler(console_handler)
-fh = logging.FileHandler(r'/home/pi/fireplace/fireplace_qt.log')
+fh = logging.FileHandler(r'~/fireplace_qt.log')
 logger.addHandler(fh)
 
 # This is our window from QtCreator
