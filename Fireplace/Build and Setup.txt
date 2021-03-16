@@ -17,16 +17,7 @@ Fireplace Build / Install Notes
 sudo apt-get update
 
 
-1. Setup autostart
- mkdir /home/pi/.config/autostart
- nano /home/pi/.config/autostart/fireplace.desktop
-Add this content:
-[Desktop Entry]
-Type=Application
-Name=Fireplace
-Exec=/home/pi/fireplace_qt.sh
-
-2. Setup Touchscreen:
+1. Setup Touchscreen:
 
 https://learn.adafruit.com/adafruit-2-8-pitft-capacitive-touch/easy-install-2
 
@@ -44,20 +35,26 @@ sudo raspi-config
 
 [OLD way] Copy autostart into ~/.config/lxsessions/LXDE-pi/autostart
 
-2. Edit mainwindow.ui in QT Designer
-3. Need Fireplace_qt.sh, fireplace_qt.py, mainwindow.ui on pi
 
-
-/boot/config.txt:
-Add this at the end: 
-
-dtoverlay=pitft28-capacitive,rotate=270,fps=20,touch-swapxy,touch-invy,touch-invx,speed=32000000
-
-
-
-5.  Python libraries needed:  (pip)
+2.  Python libraries needed:  (pip)
         Rpi.GPIO  0.6.3
 
         PyQT5:
         sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools
 
+3. Install Software:
+
+git clone https://github.com/bsileo/HomeAutomation.git
+
+    mainwindow.ui in QT Designer
+    Fireplace_qt.sh, fireplace_qt.py, mainwindow.ui on pi
+
+
+4. Setup autostart
+ mkdir /home/pi/.config/autostart
+ nano /home/pi/.config/autostart/fireplace.desktop
+Add this content:
+[Desktop Entry]
+Type=Application
+Name=Fireplace
+Exec=/home/pi/fireplace_qt.sh

@@ -15,7 +15,10 @@ import logging
 # Maybe needed later to read GPIO status to update "current" mode display
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
- 
+
+
+def uri ="http://192.168.2.106:39501"
+
 log_format = '%(asctime)-6s: %(name)s - %(levelname)s - %(message)s'
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(log_format))
@@ -136,7 +139,7 @@ class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
 
 	def mouseMoveEvent(self, e):
 		self.wakeup()
-		super(GraphicsView, self).mouseMoveEvent(e)
+		# super(GraphicsView, self).mouseMoveEvent(e)
 
 	def wakeup(self):
 		global touchTime
