@@ -1,10 +1,60 @@
 Fireplace Build / Install Notes
 
 
-1. Copy autostart into ~/config/lxsessions/LXDE-pi/autostart
+1. Install Pi Desktop with auto start:
+
+        country=US
+        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+        update_config=1
+
+        network={
+        ssid="Sileo"
+        psk="max=-hank"
+        }
+
+        touch ssh on boot drive
+
+sudo apt-get update
+
+
+1. Setup autostart
+ mkdir /home/pi/.config/autostart
+ nano /home/pi/.config/autostart/fireplace.desktop
+Add this content:
+[Desktop Entry]
+Type=Application
+Name=Fireplace
+Exec=/home/pi/fireplace_qt.sh
+
+2. Setup Touchscreen:
+
+https://learn.adafruit.com/adafruit-2-8-pitft-capacitive-touch/easy-install-2
+
+cd ~
+sudo apt-get install -y git python3-pip
+sudo pip3 install --upgrade adafruit-python-shell click==7.0
+git clone https://github.com/adafruit/Raspberry-Pi-Installer-Scripts.git
+cd Raspberry-Pi-Installer-Scripts
+
+
+
+sudo raspi-config
+  -> Setup to auto boot to desktop as pi user
+
+
+[OLD way] Copy autostart into ~/.config/lxsessions/LXDE-pi/autostart
+
 2. Edit mainwindow.ui in QT Designer
-3. Need Firepalce_qt.sh, fireplace_qt.py, mainwindow.ui on pi
-4. Setup touchscreen???
+3. Need Fireplace_qt.sh, fireplace_qt.py, mainwindow.ui on pi
+
+
+/boot/config.txt:
+Add this at the end: 
+
+dtoverlay=pitft28-capacitive,rotate=270,fps=20,touch-swapxy,touch-invy,touch-invx,speed=32000000
+
+
+
 5.  Python libraries needed:  (pip)
         Rpi.GPIO  0.6.3
 
