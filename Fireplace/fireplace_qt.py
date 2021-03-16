@@ -17,7 +17,8 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 
-def uri ="http://192.168.2.106:39501"
+uri ="http://192.168.2.106:39501"
+access_token = ""
 
 log_format = '%(asctime)-6s: %(name)s - %(levelname)s - %(message)s'
 console_handler = logging.StreamHandler()
@@ -25,7 +26,7 @@ console_handler.setFormatter(logging.Formatter(log_format))
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 logger.addHandler(console_handler)
-fh = logging.FileHandler(r'~/fireplace_qt.log')
+fh = logging.FileHandler(r'fireplace_qt.log')
 logger.addHandler(fh)
 
 # This is our window from QtCreator
