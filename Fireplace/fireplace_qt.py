@@ -35,7 +35,7 @@ import mainwindow_auto
 touchTime = QTime(0,0,0)
 pi_pwm = 0
 # create class for our Raspberry Pi GUI
-class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
+class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 	# access variables inside of the UI's file
 	def __init__(self):
 		super(self.__class__, self).__init__()
