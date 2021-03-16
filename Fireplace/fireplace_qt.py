@@ -30,7 +30,7 @@ fh = logging.FileHandler(r'fireplace_qt.log')
 logger.addHandler(fh)
 
 # This is our window from QtCreator
-import mainwindow_auto
+import mainwindow
 
 touchTime = QTime(0,0,0)
 pi_pwm = 0
@@ -51,8 +51,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 		self.yellowButton.clicked.connect(self.pressedyellowButton)
 		self.ltBlueButton.clicked.connect(self.pressedltBlueButton)
 		self.whiteButton.clicked.connect(self.pressedwhiteButton)
-		self.offButton.clicked.connect(self.pressedoffButton)
-		self.heatCheck.stateChanged.connect(self.changedHeat)
+		
 				
 	def pressedredButton(self):
 		self.gpi_button(self,'red')

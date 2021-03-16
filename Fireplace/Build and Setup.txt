@@ -58,3 +58,9 @@ Add this content:
 Type=Application
 Name=Fireplace
 Exec=/home/pi/fireplace_qt.sh
+
+
+5. GUI Edits / Updates
+Use QT Designer to edit mainwindow.ui
+pip install pyqt5-tools
+python -m PyQt5.uic.pyuic -x mainwindow.ui -o mainwindow.py
