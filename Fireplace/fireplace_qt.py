@@ -16,11 +16,6 @@ import logging
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
  
-# client id and client secret
-uri = 'https://graph.api.smartthings.com/api/smartapps/installations/e0a5f574-7335-46d4-9a78-b46e4410c82a'
-access_token='ac626b44-b7b5-4108-9a8c-7718f568bbf4'
- 
-
 log_format = '%(asctime)-6s: %(name)s - %(levelname)s - %(message)s'
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(log_format))
