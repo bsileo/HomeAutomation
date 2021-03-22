@@ -201,9 +201,17 @@ def main():
 	sys.exit(app.exec_())
 
 @app.route('/red')
-def red()
+def red():
+	global form
 	form.red(form)
 
+logger.debug("NAME=" + __name__)
+
+
+def run():
+   	from webapp import app
+   	app.run(debug=True, use_reloader=False)
+   	main()
 
 # python bit to figure how who started This
 if __name__ == "__main__":
