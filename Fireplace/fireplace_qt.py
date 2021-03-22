@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import QTime
+from flask import Flask
 
 import time
 import requests
@@ -28,6 +29,9 @@ logger.setLevel(logging.INFO)
 logger.addHandler(console_handler)
 fh = logging.FileHandler(r'fireplace_qt.log')
 logger.addHandler(fh)
+
+app = Flask(__name__)
+	
 
 # This is our window from QtCreator
 import mainwindow
@@ -102,6 +106,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 			QApplication.restoreOverrideCursor()
 		else:
 			self.wakeup()
+	@app.route('/off')
 	def off(self):
 		self.setColorSwitches("lightoff",0,0,0)
 
@@ -194,6 +199,7 @@ def main():
 	form = MainWindow()
 	form.show()
 	form.startSleepTimer()
+	
 	# without this, the script exits immediately.
 	sys.exit(app.exec_())
  
