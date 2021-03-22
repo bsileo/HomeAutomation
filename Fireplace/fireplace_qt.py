@@ -51,6 +51,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 		self.yellowButton.clicked.connect(self.pressedyellowButton)
 		self.ltBlueButton.clicked.connect(self.pressedltBlueButton)
 		self.whiteButton.clicked.connect(self.pressedwhiteButton)
+		self.offButton.clicked.connect(self.pressedoffButton)
 		
 				
 	def pressedredButton(self):

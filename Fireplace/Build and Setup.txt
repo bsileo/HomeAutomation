@@ -36,6 +36,13 @@ sudo raspi-config
 [OLD way] Copy autostart into ~/.config/lxsessions/LXDE-pi/autostart
 
 
+Install TSLIB for touch screen configuration:
+https://www.impulseadventure.com/elec/rpi-install-tslib.html
+
+X11 Calibration  https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/resistive-touchscreen-manual-install-calibrate#x-calibration
+sudo apt-get install libxaw7-dev libxxf86vm-dev libxaw7-dev libxft-dev
+
+
 2.  Python libraries needed:  (pip)
         Rpi.GPIO  0.6.3
 
