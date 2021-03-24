@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(320, 240)
-        MainWindow.setMinimumSize(QtCore.QSize(320, 240))
-        MainWindow.setMaximumSize(QtCore.QSize(320, 240))
+        MainWindow.resize(310, 230)
+        MainWindow.setMinimumSize(QtCore.QSize(310, 230))
+        MainWindow.setMaximumSize(QtCore.QSize(310, 230))
         MainWindow.setStyleSheet("background-color: black;\n"
 "border-style: outset;\n"
 "border-width: 2px;\n"
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.blueButton = QtWidgets.QPushButton(self.centralWidget)
-        self.blueButton.setGeometry(QtCore.QRect(180, 30, 101, 41))
+        self.blueButton.setGeometry(QtCore.QRect(170, 30, 101, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.blueButton.setText("")
         self.blueButton.setObjectName("blueButton")
         self.redButton = QtWidgets.QPushButton(self.centralWidget)
-        self.redButton.setGeometry(QtCore.QRect(30, 30, 91, 41))
+        self.redButton.setGeometry(QtCore.QRect(40, 30, 91, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         self.redButton.setAutoDefault(False)
         self.redButton.setObjectName("redButton")
         self.offButton = QtWidgets.QPushButton(self.centralWidget)
-        self.offButton.setGeometry(QtCore.QRect(180, 180, 101, 41))
+        self.offButton.setGeometry(QtCore.QRect(170, 180, 101, 41))
         self.offButton.setStyleSheet("background-color: gainsboro;\n"
 "border-style: outset;\n"
 "border-width: 2px;\n"
@@ -117,7 +117,7 @@ class Ui_MainWindow(object):
 "padding: 6px;")
         self.offButton.setObjectName("offButton")
         self.purpleButton = QtWidgets.QPushButton(self.centralWidget)
-        self.purpleButton.setGeometry(QtCore.QRect(30, 80, 91, 41))
+        self.purpleButton.setGeometry(QtCore.QRect(40, 80, 91, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(128, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -156,7 +156,7 @@ class Ui_MainWindow(object):
         self.purpleButton.setText("")
         self.purpleButton.setObjectName("purpleButton")
         self.yellowButton = QtWidgets.QPushButton(self.centralWidget)
-        self.yellowButton.setGeometry(QtCore.QRect(180, 80, 101, 41))
+        self.yellowButton.setGeometry(QtCore.QRect(170, 80, 101, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -196,7 +196,7 @@ class Ui_MainWindow(object):
         self.yellowButton.setText("")
         self.yellowButton.setObjectName("yellowButton")
         self.greenButton = QtWidgets.QPushButton(self.centralWidget)
-        self.greenButton.setGeometry(QtCore.QRect(30, 130, 91, 41))
+        self.greenButton.setGeometry(QtCore.QRect(40, 130, 91, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 128, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -235,7 +235,7 @@ class Ui_MainWindow(object):
         self.greenButton.setText("")
         self.greenButton.setObjectName("greenButton")
         self.ltBlueButton = QtWidgets.QPushButton(self.centralWidget)
-        self.ltBlueButton.setGeometry(QtCore.QRect(180, 130, 101, 41))
+        self.ltBlueButton.setGeometry(QtCore.QRect(170, 130, 101, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -274,7 +274,7 @@ class Ui_MainWindow(object):
         self.ltBlueButton.setText("")
         self.ltBlueButton.setObjectName("ltBlueButton")
         self.whiteButton = QtWidgets.QPushButton(self.centralWidget)
-        self.whiteButton.setGeometry(QtCore.QRect(30, 180, 91, 41))
+        self.whiteButton.setGeometry(QtCore.QRect(40, 180, 91, 41))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
