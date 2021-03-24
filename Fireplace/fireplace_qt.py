@@ -91,7 +91,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 	def sleepTimer(self):
 		global touchTime
 		global fireplace
-		wait = 1*60*1000  # 1 minute
+		wait = 1*30*1000  # 1 minute
 
 		logger.debug("Check sleep status--" + str(touchTime.elapsed()) + " >? " + str(wait))
 		try:
@@ -103,10 +103,10 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 					fireplace.sleep()
 					self.sleeping=True
 				else:
-					logger.info("still asleep")
+					logger.debug("still asleep")
 		finally:
-			# check every 5 seconds
-			QTimer.singleShot(5*1000, self.sleepTimer)
+			# check every 30 seconds
+			QTimer.singleShot(30*1000, self.sleepTimer)
 
 
 class Fireplace:
