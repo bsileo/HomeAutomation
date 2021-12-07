@@ -26,11 +26,12 @@ sudo apt-get install -y git python3-pip
 sudo pip3 install --upgrade adafruit-python-shell click==7.0
 git clone https://github.com/adafruit/Raspberry-Pi-Installer-Scripts.git
 cd Raspberry-Pi-Installer-Scripts
-
+sudo python3 adafruit-pitft.py --display=28c --rotation=90 --install-type=fbcp
 
 
 sudo raspi-config
   -> Setup to auto boot to desktop as pi user
+  -> Turn on i2C interface for relays    (https://wiki.52pi.com/index.php?title=EP-0099)
 
 
 [OLD way] Copy autostart into ~/.config/lxsessions/LXDE-pi/autostart
@@ -56,6 +57,8 @@ git clone https://github.com/bsileo/HomeAutomation.git
     mainwindow.ui in QT Designer
     Fireplace_qt.sh, fireplace_qt.py, mainwindow.ui on pi
 
+cd HomeAutomation/Fireplace/
+chmod +x *.sh
 
 4. Setup autostart
  mkdir /home/pi/.config/autostart
@@ -64,7 +67,11 @@ Add this content:
 [Desktop Entry]
 Type=Application
 Name=Fireplace
-Exec=/home/pi/fireplace_qt.sh
+Exec=/home/pi/HomeAutomation/Fireplace/fireplace_qt.sh
+
+cronttab -e  and add:
+@reboot /home/pi/HomeAutomation/Fireplace/fireplace_api.sh >> /home/pi/fapi.log$
+
 
 
 5. GUI Edits / Updates

@@ -15,14 +15,9 @@
 # HomeAutomation package install
 
 git config --global  user.name "Brad Sileo"
-
 git config --global  user.email "brad@sileo.name"
-
 git config --global credential.helper 'cache --timeout=36000'
-
 git clone https://github.com/bsileo/HomeAutomation.git
--   Username: bsileo
--  Password: 64eb61c8427e926670248aafa81c04f19ba93623  (Access Token from https://github.com/settings/tokens)
 
 cd HomeAutomation
 
@@ -32,7 +27,7 @@ mkdir logs
 - pip3 install influxdb
 - pip3 install pigpio
 
-// No long need virtual environment
+// No longer need virtual environment
 
 - // sudo apt install virtualenv python3-virtualenv -y
 
@@ -64,4 +59,11 @@ pm2 save
 pm2 startup
 - follow resulting prompt to cut and paste command
   
-### Node
+# Temp Probe Wiring
+[Connected via resistor board](https://smile.amazon.com/dp/B087JQ6MCP?psc=1&ref=ppx_pop_dt_b_product_details)
+
+Red ------------- 3.3V (pin 1)
+
+Black ----------- Ground (pin 20 )
+
+Yellow ------------- GPIO 4 (pin 7)
