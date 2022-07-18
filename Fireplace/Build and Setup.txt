@@ -34,10 +34,11 @@ sudo raspi-config
   -> Turn on i2C interface for relays    (https://wiki.52pi.com/index.php?title=EP-0099)
   -> Disable Screen blanking
 
-[OLD way] Copy autostart into ~/.config/lxsessions/LXDE-pi/autostart
-
 
 Install TSLIB for touch screen configuration:
+
+sudo apt-get install evtest tslib libts-bin
+
 https://www.impulseadventure.com/elec/rpi-install-tslib.html
 
 X11 Calibration  https://learn.adafruit.com/adafruit-pitft-28-inch-resistive-touchscreen-display-raspberry-pi/resistive-touchscreen-manual-install-calibrate#x-calibration
