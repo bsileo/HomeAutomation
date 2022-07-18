@@ -13,6 +13,8 @@ import time
 import requests
 import logging
 
+import smbus
+
 # Maybe needed later to read GPIO status to update "current" mode display
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
@@ -34,6 +36,11 @@ logger.addHandler(fh)
 import mainwindow
 
 touchTime = QTime(0,0,0)
+
+# 52PI EP-0099 Relay
+DEVICE_BUS = 1
+DEVICE_ADDR = 0x10
+		
 
 # create class for our Raspberry Pi GUI
 class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
@@ -119,6 +126,7 @@ class Fireplace:
 		GPIO.setup(18,GPIO.OUT)
 		self.pi_pwm = GPIO.PWM(18,100)
 		self.pi_pwm.start(100)
+		self.bus = smbus.SMBus(DEVICE_BUS)
 
 	def changedHeat(self):
 		if (self.awake()):
@@ -166,8 +174,11 @@ class Fireplace:
 	def setColorSwitches(self,color,sw1,sw2,sw3):
 	   	#logger.debug("setSwitches " + color + " = " + sw1 + "," + sw2 +"," + sw3)
 		GPIO.output(17, 0 if sw1 else 1)
+		bus.write_byte_data(DEVICE_ADDR, 1, 0x00 if sw1 else 0xFF)
 		GPIO.output(27, 0 if sw2 else 1)
+		bus.write_byte_data(DEVICE_ADDR, 2, 0x00 if sw1 else 0xFF)
 		GPIO.output(22, 0 if sw3 else 1)
+		bus.write_byte_data(DEVICE_ADDR, 3, 0x00 if sw1 else 0xFF)
 		url = uri + "/press/" + color
 		data = {'color': color }
 		headers = { 'Authorization' : 'Bearer ' + access_token }
