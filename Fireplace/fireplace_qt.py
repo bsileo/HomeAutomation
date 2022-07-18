@@ -176,9 +176,9 @@ class Fireplace:
 		GPIO.output(17, 0 if sw1 else 1)
 		self.bus.write_byte_data(DEVICE_ADDR, 1, 0x00 if sw1 else 0xFF)
 		GPIO.output(27, 0 if sw2 else 1)
-		self.bus.write_byte_data(DEVICE_ADDR, 2, 0x00 if sw1 else 0xFF)
+		self.bus.write_byte_data(DEVICE_ADDR, 2, 0x00 if sw2 else 0xFF)
 		GPIO.output(22, 0 if sw3 else 1)
-		self.bus.write_byte_data(DEVICE_ADDR, 3, 0x00 if sw1 else 0xFF)
+		self.bus.write_byte_data(DEVICE_ADDR, 3, 0x00 if sw3 else 0xFF)
 		url = uri + "/press/" + color
 		data = {'color': color }
 		headers = { 'Authorization' : 'Bearer ' + access_token }
