@@ -27,20 +27,36 @@ log_format = '%(asctime)-6s: %(name)s - %(levelname)s - %(message)s'
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(log_format))
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 logger.addHandler(console_handler)
 fh = logging.FileHandler(r'fireplace_qt.log')
+fh.setFormatter(logging.Formatter(log_format))
 logger.addHandler(fh)
 
-# This is our window from QtCreator
+# These are our windows from QtCreator
 import mainwindow
+import sleepWindow
 
 touchTime = QTime(0,0,0)
+pi_pwm = 0
+
+
+class SleepWindow(QWidget, sleepWindow.Ui_Form):
+	def __init__(self, parent):
+		super(self.__class__, self).__init__()
+		self.setupUi(self)
+		self.parent = parent
+		self.setWindowFlag(Qt.FramelessWindowHint)
+
+	def mousePressEvent(self, e):
+		self.wakeup()
+
+	def wakeup(self):
+		self.parent.wakeup()
 
 # 52PI EP-0099 Relay
 DEVICE_BUS = 1
 DEVICE_ADDR = 0x10
-		
 
 # create class for our Raspberry Pi GUI
 class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
@@ -51,6 +67,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 		self.setupUi(self) # gets defined in the UI file
 		self.showFullScreen()
 		self.setMouseTracking(True)
+		self.sleepWindow = SleepWindow(self)
 		global fireplace
 
 		self.redButton.clicked.connect(fireplace.red)
@@ -89,6 +106,13 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 
 		fireplace.wakeup()
 		self.sleeping=False
+		self.sleepWindow.close()
+
+	def sleep(self):
+		logger.info("Going to sleep")
+		fireplace.sleep()
+		self.sleepWindow.show()
+		self.sleeping=True
 
 	def startSleepTimer(self):
 		global touchTime
@@ -98,7 +122,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 	def sleepTimer(self):
 		global touchTime
 		global fireplace
-		wait = 1*30*1000  # 1 minute
+		wait = 1*30*1000  # 30 seconds
 
 		logger.debug("Check sleep status--" + str(touchTime.elapsed()) + " >? " + str(wait))
 		try:
@@ -106,14 +130,12 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 			if (touchTime.elapsed() > wait):
 				# go to sleep
 				if (self.awake()):
-					logger.info("Going to sleep")
-					fireplace.sleep()
-					self.sleeping=True
+					self.sleep()
 				else:
-					logger.debug("still asleep")
+					logger.debug("Still asleep")
 		finally:
-			# check every 30 seconds
-			QTimer.singleShot(30*1000, self.sleepTimer)
+			# check every 10 seconds
+			QTimer.singleShot(10*1000, self.sleepTimer)
 
 
 class Fireplace:
@@ -124,8 +146,9 @@ class Fireplace:
 		GPIO.setup(22, GPIO.OUT, initial=1)
 		GPIO.setup(23, GPIO.OUT, initial=1)
 		GPIO.setup(18,GPIO.OUT)
-		self.pi_pwm = GPIO.PWM(18,100)
-		self.pi_pwm.start(100)
+		global pi_pwm
+		pi_pwm = GPIO.PWM(18,1000)
+		pi_pwm.start(100)
 		self.bus = smbus.SMBus(DEVICE_BUS)
 
 	def changedHeat(self):
@@ -138,10 +161,14 @@ class Fireplace:
 				logger.info('Pressed Heat - OFF')
 
 	def wakeup(self):
-		self.pi_pwm.ChangeDutyCycle(100)
+		global pi_pwm
+		pi_pwm.ChangeDutyCycle(100)
+		logger.debug("Set Fireplace awake")
 
 	def sleep(self):
-		self.pi_pwm.ChangeDutyCycle(0)
+		global pi_pwm
+		pi_pwm.ChangeDutyCycle(0)
+		logger.debug("Set Fireplace to sleep")
 
 	def off(self):
 		self.setColorSwitches("lightoff",0,0,0)
@@ -253,7 +280,8 @@ def main():
 	qtapp = QApplication(sys.argv)
 	form = MainWindow()
 	form.show()
-	form.startSleepTimer()
+	logger.info("Fireplace Form startup complete")
+	# form.startSleepTimer()
 	# without this, the script exits immediately.
 	sys.exit(qtapp.exec_())
 
