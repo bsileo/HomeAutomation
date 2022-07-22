@@ -27,7 +27,8 @@ log_format = '%(asctime)-6s: %(name)s - %(levelname)s - %(message)s'
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(log_format))
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 logger.addHandler(console_handler)
 fh = logging.FileHandler(r'fireplace_qt.log')
 fh.setFormatter(logging.Formatter(log_format))
@@ -112,6 +113,7 @@ class MainWindow(QMainWindow, mainwindow.Ui_MainWindow):
 		logger.info("Going to sleep")
 		fireplace.sleep()
 		self.sleepWindow.show()
+		self.sleepWindow.showFullScreen()
 		self.sleeping=True
 
 	def startSleepTimer(self):
@@ -145,11 +147,13 @@ class Fireplace:
 		GPIO.setup(27, GPIO.OUT, initial=1)
 		GPIO.setup(22, GPIO.OUT, initial=1)
 		GPIO.setup(23, GPIO.OUT, initial=1)
-		GPIO.setup(18,GPIO.OUT)
+		GPIO.setup(18,GPIO.OUT, initial=1)
 		global pi_pwm
-		pi_pwm = GPIO.PWM(18,1000)
-		pi_pwm.start(100)
+		#pi_pwm = GPIO.PWM(18,1000)
+		#pi_pwm.start(100)
+
 		self.bus = smbus.SMBus(DEVICE_BUS)
+		self.color=""
 
 	def changedHeat(self):
 		if (self.awake()):
@@ -161,13 +165,15 @@ class Fireplace:
 				logger.info('Pressed Heat - OFF')
 
 	def wakeup(self):
-		global pi_pwm
-		pi_pwm.ChangeDutyCycle(100)
+		#global pi_pwm
+		#pi_pwm.ChangeDutyCycle(100)
+		GPIO.output(18, 1)
 		logger.debug("Set Fireplace awake")
 
 	def sleep(self):
-		global pi_pwm
-		pi_pwm.ChangeDutyCycle(0)
+		#global pi_pwm
+		#pi_pwm.ChangeDutyCycle(0)
+		GPIO.output(18, 0)
 		logger.debug("Set Fireplace to sleep")
 
 	def off(self):
@@ -199,27 +205,28 @@ class Fireplace:
 		self.setColorSwitches("off",0,0,0)
 
 	def setColorSwitches(self,color,sw1,sw2,sw3):
-	   	#logger.debug("setSwitches " + color + " = " + sw1 + "," + sw2 +"," + sw3)
+		logger.debug("setSwitches " + color + " = " + str(sw1) + "," + str(sw2) +"," + str(sw3))
 		GPIO.output(17, 0 if sw1 else 1)
-		self.bus.write_byte_data(DEVICE_ADDR, 1, 0x00 if sw1 else 0xFF)
+		self.bus.write_byte_data(DEVICE_ADDR, 1, 0xFF if sw1 else 0x00)
 		GPIO.output(27, 0 if sw2 else 1)
-		self.bus.write_byte_data(DEVICE_ADDR, 2, 0x00 if sw2 else 0xFF)
+		self.bus.write_byte_data(DEVICE_ADDR, 2, 0xFF if sw2 else 0x00)
 		GPIO.output(22, 0 if sw3 else 1)
-		self.bus.write_byte_data(DEVICE_ADDR, 3, 0x00 if sw3 else 0xFF)
+		self.bus.write_byte_data(DEVICE_ADDR, 3, 0xFF if sw3 else 0x00)
+		self.color = color
 		url = uri + "/press/" + color
 		data = {'color': color }
 		headers = { 'Authorization' : 'Bearer ' + access_token }
 		r = requests.put(url, headers=headers, json=data)
 		logger.debug(r)
 
-
+from flask import Response
 app = Flask(__name__)
 
 @app.route('/red')
 def red():
 	global fireplace
 	fireplace.red()
-	return "{message:'Set to Red', status:1}"
+	return Response("{message:'Set to Red', status:1}", mimetype='text/json')
 
 @app.route('/blue')
 def blue():
